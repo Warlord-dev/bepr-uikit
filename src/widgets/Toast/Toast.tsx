@@ -25,13 +25,22 @@ const StyledToast = styled.div`
   }
 `;
 
-const Toast: React.FC<ToastProps> = ({ toast, onRemove, style, ttl, ...props }) => {
+const Toast: React.FC<ToastProps> = ({
+  toast,
+  onRemove,
+  style,
+  ttl,
+  ...props
+}) => {
   const timer = useRef<number>();
   const ref = useRef(null);
   const removeHandler = useRef(onRemove);
   const { id, title, description, type, action } = toast;
 
-  const handleRemove = useCallback(() => removeHandler.current(id), [id, removeHandler]);
+  const handleRemove = useCallback(() => removeHandler.current(id), [
+    id,
+    removeHandler,
+  ]);
 
   const handleMouseEnter = () => {
     clearTimeout(timer.current);
@@ -63,8 +72,16 @@ const Toast: React.FC<ToastProps> = ({ toast, onRemove, style, ttl, ...props }) 
 
   return (
     <CSSTransition nodeRef={ref} timeout={250} style={style} {...props}>
-      <StyledToast ref={ref} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <Alert title={title} variant={alertTypeMap[type]} onClick={handleRemove}>
+      <StyledToast
+        ref={ref}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <Alert
+          title={title}
+          variant={alertTypeMap[type]}
+          onClick={handleRemove}
+        >
           {action ? (
             <>
               <Text as="p" mb="8px">

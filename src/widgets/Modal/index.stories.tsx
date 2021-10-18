@@ -46,13 +46,21 @@ interface BackButtonModalProps extends InjectedProps {
   title: string;
 }
 
-const BackButtonModal: React.FC<BackButtonModalProps> = ({ title, onDismiss }) => {
+const BackButtonModal: React.FC<BackButtonModalProps> = ({
+  title,
+  onDismiss,
+}) => {
   const handleOnBack = () => {
     return 1;
   };
 
   return (
-    <Modal title={title} onDismiss={onDismiss} onBack={handleOnBack} hideCloseButton>
+    <Modal
+      title={title}
+      onDismiss={onDismiss}
+      onBack={handleOnBack}
+      hideCloseButton
+    >
       <Button onClick={onDismiss} variant="text" fullWidth>
         Consumer can still close it.
       </Button>
@@ -61,7 +69,10 @@ const BackButtonModal: React.FC<BackButtonModalProps> = ({ title, onDismiss }) =
 };
 
 export const WithBackButton: React.FC = () => {
-  const [onPresent1] = useModal(<BackButtonModal title="Modal with no X" />, false);
+  const [onPresent1] = useModal(
+    <BackButtonModal title="Modal with no X" />,
+    false
+  );
 
   return <Button onClick={onPresent1}>Only Back Button</Button>;
 };
